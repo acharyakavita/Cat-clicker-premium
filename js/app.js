@@ -49,7 +49,8 @@ let Controller = {
     /*to display the current cat*/
     currentCat: function (newCatObj) {
         modelCat.currentCat = catView.render(newCatObj);
-        catview.imgClick(modelCat.currentCat);
+        this.incrementCount();
+        
     },
     /*reads all cats present in model*/
     getCats: function () {
@@ -57,7 +58,7 @@ let Controller = {
     },
     /*increment count*/
     incrementCount: function () {
-        catView.incrementCount(modelCat.currentCat);
+        catview.imgClick();
     }
 
 }
@@ -89,10 +90,10 @@ let catView = {
         this.cat = Controller.getCats();
     },
     /*incrementing count if cat image is clicked*/
-    imgClick: function (currentCat) {
+    imgClick: function () {
         document.querySelector('.cat').addEventListener('click', function () {
             for (let item of this.cat){
-                if (item.name===currentCat.name){
+                if (item.name===this.cat.currentCat.name){
                     item.clickCount++;
                     document.querySelector('.clickCount').textContent = item.clickCount;
                 }
